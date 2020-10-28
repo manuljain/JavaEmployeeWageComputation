@@ -1,17 +1,14 @@
 import java.util.Random;
 public class EmpWageBuilder {
-
-    public static void main(String[] args) {
-        // Welcome message
-        System.out.println("welcome to Employee Wage Computation Program.");
-
-        // defining variables
-        int wagePerHour = 20;
-        int fullDayHour = 8;
-        int partTimeHour = 4;
-        int monthlyWorkingDays = 20;
-        int totalWorkingHours = 0;
-
+    // defining variables
+    static int wagePerHour = 20;
+    static int fullDayHour = 8;
+    static int partTimeHour = 4;
+    static int monthlyWorkingDays = 20;
+    static int totalWorkingHours = 0;
+    
+    // defining method
+    public void workingHrs(){
         for(int i=0;i<monthlyWorkingDays;i++){
 
             //generating random values 0,1 and 2
@@ -31,9 +28,18 @@ public class EmpWageBuilder {
                 break;
             }
         }
+    
         System.out.println("Total Working Hours : " + totalWorkingHours );
         // calculating total monthly wage
         int totalMonthlyWage=totalWorkingHours * wagePerHour;
         System.out.println("Total monthly wage : " + totalMonthlyWage);
+    }
+    public static void main(String[] args) {
+        // Welcome message
+        System.out.println("welcome to Employee Wage Computation Program.");
+        EmpWageBuilder empb = new EmpWageBuilder();
+        
+        // function call
+        empb.workingHrs();
     }
 }
