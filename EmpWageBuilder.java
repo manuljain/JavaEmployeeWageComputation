@@ -28,14 +28,19 @@ public class EmpWageBuilder {
             break;
         }
     }
+    // calculating total month wage
     public void fullTime(){
         int wagePerHour = 20;
         int fullDayHour = 8;
-        System.out.println("daily full timewage is : "+wagePerHour*fullDayHour);
+        int monthlyWorkingDays = 20;
+        int totalMonthWage = wagePerHour*fullDayHour*monthlyWorkingDays;
+        System.out.println("daily full timewage is : "+totalMonthWage);
     }
     public void partTime(){
         int wagePerHour = 20;
         int partTimeHour = 4;
-        System.out.println("daily part time wage is : "+wagePerHour*partTimeHour);
+        int monthlyWorkingDays = 20;
+        int totalMonthWage = wagePerHour*partTimeHour*monthlyWorkingDays;
+        System.out.println("daily part time wage is : "+totalMonthWage);
     }
 }
