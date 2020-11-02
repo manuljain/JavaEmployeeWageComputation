@@ -1,85 +1,61 @@
 import java.util.Random;
-import java.util.Scanner;
+
 public class EmpWageBuilder {
     
-    static int day = 1;
-    static int totalWorkingHours = 0;
-        
-    // defining method
-    public void totalWage(int wagePerHour) {
-        int totalMonthlyWage = totalWorkingHours * wagePerHour;
-        System.out.println("Employee worked " + totalWorkingHours + " Hours in a Month");
-        System.out.println("Employee Wage : " + totalMonthlyWage);
-    }
-    //defining method for counting 20 days
-    public void days(int fullTimeHrs, int PartTimeHrs, int dayNum) {
-
-        //To Generate Randoms 0, 1 and 2
-        Random ran = new Random();
-        int empCheck = ran.nextInt(3);
-
-        //Employee is Present or Not
-        if (empCheck == 0) {
-            totalWorkingHours += fullTimeHrs;
-        } else if (empCheck == 1) {
-            totalWorkingHours += PartTimeHrs;
-        }
-        day += 1;
-        if (day <= dayNum) {
-            EmpWageBuilder emp = new EmpWageBuilder();
-            emp.days(fullTimeHrs, PartTimeHrs, dayNum);
-        }
-    }
-
-    public static void main(String[] args) {
-        // Welcome message
-        System.out.println("welcome to the Employee Wage Computation Program");
-        int company = 1;
-        while (true){
-            System.out.println("==========================================");
-            System.out.println("Company "+company+"Employee wage computation");
-            System.out.println("==========================================");
-            //User-readers
-            Scanner reader = new Scanner(System.in);
-
-            System.out.println("Enter Wage Per Hour : ");
-            int wagePrHr = reader.nextInt();
-
-            System.out.println("Enter Full Time Hours : ");
-            int ftHrs = reader.nextInt();
-
-            System.out.println("Enter Half Time Hours : ");
-            int htHrs = reader.nextInt();
-
-            System.out.println("Enter number of days in which employee can work in a month : ");
-            int dayNum = reader.nextInt();
-
-            System.out.println("Enter number of working hours employee can work in a month : ");
-            int monthlyWorkingHrs = reader.nextInt();
-
-            EmpWageBuilder emp = new EmpWageBuilder();
-            System.out.println("=========================================");
-            emp.days(ftHrs,htHrs,dayNum);
-                //Setting Working Hours 100 if greater 100
-                if (totalWorkingHours > monthlyWorkingHrs) {
-                    totalWorkingHours = monthlyWorkingHrs;
-                }
-            emp.totalWage(monthlyWorkingHrs);
-	        System.out.println("=========================================");
-            
-            // if you want another company's wage
-            System.out.println("want 1 more company's wage?");
-            System.out.println("write yes if u want to");
-            System.out.println("otherwise write no");
-            Scanner scanner = new Scanner(System.in);
-            String cnfrm = scanner.nextLine();
-            if(cnfrm.equals("yes") || cnfrm.equals("YES")){
-                company+=1;
-                continue;
-            }else if (cnfrm.equals("no") || cnfrm.equals("NO")){
     
+    static String company;
+    static int wagePerHour;
+    static int workingDays;
+    static int monthlyHrs;
+    static int totalMonthlyWage;
+    
+    //Constructor
+    EmpWageBuilder(String company, int wagePerHour, int workingDays, int monthlyHrs) {
+        this.company = company;
+        this.wagePerHour = wagePerHour;
+        this.workingDays = workingDays;
+        this.monthlyHrs = monthlyHrs;
+    }
+    //Computing Wage for Companies
+    static void totalWage() {
+        //Variables
+        int totalWorkingHours=0, fullTimeHrs=8, partTimeHrs=4;
+        for (int i=0; i<workingDays; i++) {
+            //To Generate Randoms 0, 1 and 2
+            Random ran = new Random();
+            int empCheck = ran.nextInt(3);
+            
+            //Employee is Present or Not
+            if (empCheck == 0) {
+                totalWorkingHours += fullTimeHrs;
+            } else if (empCheck == 1) {
+                totalWorkingHours += partTimeHrs;
+            } else {
+                totalWorkingHours += 0;
+            }
+            if (totalWorkingHours > monthlyHrs) {
+                totalWorkingHours = monthlyHrs;
                 break;
             }
         }
+        //Counting Total Monthly Wage
+        totalMonthlyWage=totalWorkingHours * wagePerHour;
+    }
+    public String toString(){
+        return "Total employee Wage for " + company + " is : "+ totalMonthlyWage;
+    }
+    
+
+    // Main method
+    public static void main(String[] args) {
+        System.out.println("Welcome To Employee Wage Computation");
+        System.out.println("====================================");
+        EmpWageBuilder company1 = new EmpWageBuilder("company1",20,20,100);
+        company1.totalWage();
+        System.out.println(company1);
+        System.out.println("====================================");
+        EmpWageBuilder company2 = new EmpWageBuilder("company2", 50,28, 150);
+        company2.totalWage();
+        System.out.println(company2);
     }
 }
