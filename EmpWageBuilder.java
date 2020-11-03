@@ -1,5 +1,8 @@
 import java.util.Random;
 
+interface EmpWageCalculation{
+    public void totalWage();
+}
 class CompanyEmpWage{
     
     
@@ -26,7 +29,7 @@ class CompanyEmpWage{
     }
 }
 
-public class EmpWageBuilder{
+public class EmpWageBuilder implements EmpWageCalculation{
 
     //Computing Wage for Companies
     private int numOfCompany=0;
@@ -40,7 +43,7 @@ public class EmpWageBuilder{
         EmpWageBuilderArray[numOfCompany] = new CompanyEmpWage(company, wagePerhour, workingDays,maxMonthHours);
         numOfCompany++;
     }
-    void totalWage(){
+    public void totalWage(){
         for (int i=0; i<numOfCompany; i++){
             EmpWageBuilderArray[i].setTotalMonthlyWage(this.totalWage(EmpWageBuilderArray[i]));
             System.out.println(EmpWageBuilderArray[i]);
