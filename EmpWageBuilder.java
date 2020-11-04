@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.List;
 
 interface EmpWageCal{
 public void EmpWage();
@@ -8,12 +9,23 @@ public void EmpWage();
 
 public class EmpWageBuilder implements EmpWageCal{
 
+    //Variable declaration
+    int empHr;
+    int dailyWage;
+    int totalSalary=0;
+    int partTime=0;
+    int fullTime=0;
+    int absent=0;
+    int totalDays=0;
+    int totalEmpHr=0;
+    int empRatePerHr;
+    int noWorkingDays;
+    int maxHr;
+    int k=1;
+    
 
 	public void EmpWage(){
-
-		int empRatePerHr;
-		int noWorkingDays;
-		int maxHr;
+        
 		Scanner in = new Scanner(System.in);
 		System.out.println("WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM!");
 		System.out.println("==============================================");
@@ -25,15 +37,10 @@ public class EmpWageBuilder implements EmpWageCal{
 		System.out.println("Enter a maximum Working Hours for month : ");
 		maxHr=in.nextInt();
 		System.out.println("");
-		//Variable declaration
-		int empHr;
-		int dailyWage;
-		int totalSalary=0;
-		int partTime=0;
-		int fullTime=0;
-		int absent=0;
-		int totalDays=0;
-		int totalEmpHr=0;
+		
+        
+        List<Integer> DWage = new ArrayList<Integer>();
+
 		System.out.println("COMPANY DATA");
 		System.out.println("Employee Wage per hour : "+empRatePerHr+" Maximum Working Days : "+maxHr+" Maximum Working Hours : "+maxHr);
 		System.out.println("");
@@ -57,15 +64,26 @@ public class EmpWageBuilder implements EmpWageCal{
                 empHr=4;
 			}
 		totalEmpHr+=empHr;
-		dailyWage=empRatePerHr*empHr;
+        dailyWage=empRatePerHr*empHr;
+        DWage.add(dailyWage);
 		totalSalary=dailyWage+totalSalary;
-		}
+        }
+        
 		System.out.println("EMPLOYEE DATA :");
 		System.out.println("FullTime Present Days : "+fullTime+" Part Time Present Days : "+partTime+" Absent Days : "+absent);
-		System.out.println("Total Working Days : "+totalDays+" Total Working Hours : "+totalEmpHr);
+        System.out.println("Total Working Days : "+totalDays+" Total Working Hours : "+totalEmpHr);
+        System.out.println("Daily Wages are : "+DWage);
+		for (int count=0;count<DWage.size();count++){
+			System.out.println("Day"+k+" Wage "+DWage.get(count));
+			k+=1;
+		}
 		System.out.println("Total Salary for a Month is "+totalSalary);
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("");
+    }
+    
+    public int getTotalWage(){
+		return totalSalary;
 	}
 
 	public static void main(String args[]){
@@ -77,8 +95,17 @@ public class EmpWageBuilder implements EmpWageCal{
             company.add(new EmpWageBuilder());
             company.add(new EmpWageBuilder());
 
+        Scanner sc=new Scanner(System.in);
+
         for (EmpWageBuilder c: company){
             c.EmpWage();
+            System.out.println("Wish to know total Wage. If yes then type yes else no");
+            String str=sc.nextLine();
+            if (str.equals("yes")){
+                    System.out.println(c.getTotalWage());
+            }else {
+                break;
+            }
         }
     }
 }
