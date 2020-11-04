@@ -102,7 +102,9 @@ public class EmpWageBuilder implements EmpWageCal{
             System.out.println("Wish to know total Wage. If yes then type yes else no");
             String str=sc.nextLine();
             if (str.equals("yes")){
-                    System.out.println(c.getTotalWage());
+                System.out.println("Total Wage : "+c.getTotalWage());
+                System.out.println("=================================");
+                System.out.println("");
             }else {
                 break;
             }
